@@ -9,6 +9,7 @@ import json
 import logging
 import os
 from dotenv import load_dotenv
+import random
 
 load_dotenv()  # take environment variables from .env.
 
@@ -101,10 +102,13 @@ class Api:
                 API_BASE_URL + url,
                 params=params,
                 proxies=proxies,
-                impersonate="chrome123",
+                impersonate=random.choice(["chrome110","chrome118","chrome124"]),  # current stable fingerprint
                 headers={
                     "Authorization": "Bearer " + self.auth_id,
-                    "User-Agent": USER_AGENT,
+                    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+                    "Accept-Language": "en-US,en;q=0.9",
+                    "Accept": "application/json,text/plain,*/*",
+                    "Referer": "https://truthsocial.com/",
                 },
             )
         except curl_cffi.curl.CurlError as e:
@@ -132,10 +136,13 @@ class Api:
                 next_link,
                 params=params,
                 proxies=proxies,
-                impersonate="chrome123",
+                impersonate=random.choice(["chrome110", "chrome118", "chrome124"]),  # current stable fingerprint
                 headers={
                     "Authorization": "Bearer " + self.auth_id,
-                    "User-Agent": USER_AGENT,
+                    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+                    "Accept-Language": "en-US,en;q=0.9",
+                    "Accept": "application/json,text/plain,*/*",
+                    "Referer": "https://truthsocial.com/",
                 },
             )
             link_header = resp.headers.get("Link", "")
@@ -493,9 +500,13 @@ class Api:
                 url,
                 json=payload,
                 proxies=proxies,
-                impersonate="chrome123",
+                impersonate=random.choice(["chrome110","chrome118","chrome124"]),  # current stable fingerprint
                 headers={
-                    "User-Agent": USER_AGENT,
+                    "Authorization": "Bearer " + self.auth_id,
+                    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+                    "Accept-Language": "en-US,en;q=0.9",
+                    "Accept": "application/json,text/plain,*/*",
+                    "Referer": "https://truthsocial.com/",
                 },
             )
             sess_req.raise_for_status()
